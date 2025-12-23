@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Plywood Billing - Garima Enterprises</title>
+
+  <!-- Favicon in /assets -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favi.png" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -10,7 +14,6 @@
   <div class="page">
     <header>
       <div>
-        <!-- Fixed shop name -->
         <div class="shop-name">Garima Enterprises</div>
         <div class="shop-subtitle">
           Plywood &amp; Hardware Billing
@@ -22,7 +25,7 @@
       </div>
     </header>
 
-    <!-- Customer details (will also print) -->
+    <!-- Customer details -->
     <section class="customer-row">
       <div class="customer-field">
         Customer:
@@ -38,7 +41,7 @@
       </div>
     </section>
 
-    <!-- Only this controls bar is hidden during print -->
+    <!-- Buttons (hidden on print) -->
     <section class="controls no-print">
       <div class="controls-right">
         <button class="btn btn-outline" type="button" onclick="addRow()">+ Add Row</button>
@@ -46,6 +49,7 @@
       </div>
     </section>
 
+    <!-- Billing table -->
     <div class="table-wrapper">
       <table id="billTable">
         <thead>
@@ -76,6 +80,21 @@
     <div class="footer-note">
       Amount = (Size length × Size width × Qty × Rate). All values in feet and INR.
     </div>
+
+    <!-- Visiting / business card section -->
+    <section class="card-section">
+        <h2 class="card-title">Contact &amp; Business Details:</h2>
+        <br>       
+        <div class="card-wrapper">
+          <img src="assets/vc1.png"
+               alt="Garima Enterprises visiting card front"
+               class="card-image" />
+          <img src="assets/vc2.png"
+               alt="Garima Enterprises visiting card back"
+               class="card-image" />
+        </div>
+      </section>
+      
   </div>
 
   <script src="app.js"></script>
