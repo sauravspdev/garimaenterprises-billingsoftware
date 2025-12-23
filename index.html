@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plywood Billing - Garima Enterprises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <!-- Fixed shop name -->
+        <div class="shop-name">Garima Enterprises</div>
+        <div class="shop-subtitle">
+          Plywood &amp; Hardware Billing
+        </div>
+      </div>
+      <div class="bill-meta">
+        <div>Invoice #: <span id="invoiceNumber">INV-001</span></div>
+        <div>Date: <span id="invoiceDate"></span></div>
+      </div>
+    </header>
+
+    <!-- Customer details (will also print) -->
+    <section class="customer-row">
+      <div class="customer-field">
+        Customer:
+        <input id="customerName"
+               placeholder="Enter customer name"
+               class="small-input" />
+      </div>
+      <div class="customer-field">
+        Mobile:
+        <input id="customerPhone"
+               placeholder="Contact number"
+               class="small-input" />
+      </div>
+    </section>
+
+    <!-- Only this controls bar is hidden during print -->
+    <section class="controls no-print">
+      <div class="controls-right">
+        <button class="btn btn-outline" type="button" onclick="addRow()">+ Add Row</button>
+        <button class="btn btn-primary" type="button" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </section>
+
+    <div class="table-wrapper">
+      <table id="billTable">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Item</th>
+            <th>MM</th>
+            <th>Size (Ft)</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th class="text-right">Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="billBody">
+          <!-- JS adds rows here -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6" class="text-right">Total</td>
+            <td class="text-right"><span id="grandTotal">0</span></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="footer-note">
+      Amount = (Size length × Size width × Qty × Rate). All values in feet and INR.
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
