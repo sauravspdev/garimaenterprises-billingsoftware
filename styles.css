@@ -1,292 +1,243 @@
 :root {
-    --primary: #2f4f60;
-    --accent: #c9a96a;
-    --bg: #f5f5f7;
-    --border: #d0d4da;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
+  --primary: #2f4f60;
+  --accent: #c9a96a;
+  --bg: #f5f5f7;
+  --border: #d0d4da;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: #222;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.shop-name {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.shop-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.bill-meta {
+  text-align: right;
+  font-size: 13px;
+  color: #555;
+}
+
+/* Customer row (prints as well) */
+.customer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.customer-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-input {
+  min-width: 140px;
+}
+
+/* Button controls (hidden on print) */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Table */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* responsive for mobile */
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 780px;
+  font-size: 14px;
+}
+
+thead {
+  background: #f1f2f6;
+}
+
+th,
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tfoot td {
+  font-weight: 600;
+  border-top: 2px solid var(--border);
+  background: #fbf9f3;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  background: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.amount {
+  font-weight: 500;
+}
+
+.footer-note {
+  margin-top: 12px;
+  font-size: 11px;
+  color: #6b7280;
+  text-align: right;
+}
+
+/* Action / Delete button */
+.action-cell {
+  text-align: center;
+}
+
+.row-delete-btn {
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.row-delete-btn:hover {
+  background: #fecaca;
+}
+
+/* Print styles – hide only .no-print elements */
+@media print {
   body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: #222;
+    background: #fff;
   }
-  
   .page {
-    max-width: 1200px;
-    margin: 24px auto;
-    padding: 24px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
   }
-  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Small screens */
+@media (max-width: 640px) {
   header {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    align-items: center;
-    margin-bottom: 16px;
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .shop-name {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary);
-  }
-  
-  .shop-subtitle {
-    font-size: 13px;
-    color: #6b7280;
-    margin-top: 4px;
-  }
-  
   .bill-meta {
-    text-align: right;
-    font-size: 13px;
-    color: #555;
-  }
-  
-  /* Customer row */
-  .customer-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 10px 0;
-    font-size: 13px;
-    color: #555;
-  }
-  
-  .customer-field {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  
-  .small-input {
-    min-width: 140px;
-  }
-  
-  /* Button controls */
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 16px;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  
-  .btn {
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-  }
-  
-  .btn-outline {
-    background: #fff;
-    color: var(--primary);
-    border: 1px solid var(--primary);
-  }
-  
-  .btn:active {
-    transform: translateY(1px);
-  }
-  
-  /* Table */
-  .table-wrapper {
-    width: 100%;
-    overflow-x: auto; /* responsive for mobile */
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 780px;
-    font-size: 14px;
-  }
-  
-  thead {
-    background: #f1f2f6;
-  }
-  
-  th,
-  td {
-    padding: 10px 8px;
-    border-bottom: 1px solid var(--border);
     text-align: left;
-    white-space: nowrap;
   }
-  
-  th {
-    font-weight: 600;
-    color: #4b5563;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+}
+
+/* Suggest landscape orientation for printing */
+@media print {
+  @page {
+    size: A4 landscape;   /* or just: size: landscape; */
+    margin: 10mm;
   }
-  
-  tbody tr:nth-child(even) {
-    background: #fafafa;
-  }
-  
-  tfoot td {
-    font-weight: 600;
-    border-top: 2px solid var(--border);
-    background: #fbf9f3;
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 6px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    font-size: 13px;
-    background: #fff;
-  }
-  
-  input:focus,
-  select:focus {
-    outline: 2px solid var(--accent);
-    border-color: var(--accent);
-  }
-  
-  .text-right {
-    text-align: right;
-  }
-  
-  .amount {
-    font-weight: 500;
-  }
-  
-  .footer-note {
-    margin-top: 12px;
-    font-size: 11px;
-    color: #6b7280;
-    text-align: right;
-  }
-  
-  /* Delete button */
-  .action-cell {
-    text-align: center;
-  }
-  
-  .row-delete-btn {
-    border: none;
-    background: #fee2e2;
-    color: #b91c1c;
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 11px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  .row-delete-btn:hover {
-    background: #fecaca;
-  }
-  
-  /* Visiting card section */
-  .card-section {
-    margin-top: 24px;
-    border-top: 2px solid var(--border);
-    padding-top: 16px;
-  }
-  
-  .card-title {
-    font-size: 15px;
-    margin: 0 0 8px 0;
-    color: #374151;
-  }
-  
-  .card-wrapper {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .card-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
-  }
-  
-  /* Print styles */
-  @media print {
-    body {
-      background: #fff;
-    }
-    .page {
-      margin: 0;
-      box-shadow: none;
-      border-radius: 0;
-    }
-    .no-print {
-      display: none !important;
-    }
-    @page {
-      size: A4 landscape;
-      margin: 10mm;
-    }
-  }
-  
-  /* Small screens */
-  @media (max-width: 640px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .bill-meta {
-      text-align: left;
-    }
-  }
-  
-  .card-section {
-    margin-top: 24px;
-    border-top: 2px solid var(--border);
-    padding-top: 16px;
-  }
-  
-  .card-title {
-    font-size: 15px;
-    margin: 0 0 8px 0;
-    color: #374151;
-  }
-  
-  /* two cards side by side */
-  .card-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap; /* stack on very small mobiles */
-  }
-  
-  .card-image {
-    width: 360px;          /* approximate business card width on screen */
-    height: auto;          /* keep aspect ratio */
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
-  }
-  
+}

@@ -43,6 +43,7 @@ const ITEM_OPTIONS = [
     });
     document.getElementById("invoiceDate").textContent = formatted;
   
+    // Add some blank rows
     for (let i = 0; i < 5; i++) addRow();
   })();
   
@@ -117,7 +118,7 @@ const ITEM_OPTIONS = [
     amtTd.textContent = "0";
     row.appendChild(amtTd);
   
-    // Action (Delete)
+    // Action (Delete button)
     const actionTd = document.createElement("td");
     actionTd.className = "action-cell";
     const delBtn = document.createElement("button");
