@@ -55,7 +55,7 @@ header {
   color: #555;
 }
 
-/* Customer row (prints as well) */
+/* Customer row */
 .customer-row {
   display: flex;
   flex-wrap: wrap;
@@ -75,7 +75,7 @@ header {
   min-width: 140px;
 }
 
-/* Button controls (hidden on print) */
+/* Button controls */
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -115,7 +115,7 @@ header {
 /* Table */
 .table-wrapper {
   width: 100%;
-  overflow-x: auto; /* responsive for mobile */
+  overflow-x: auto;
   border-radius: 8px;
   border: 1px solid var(--border);
 }
@@ -153,7 +153,7 @@ tbody tr:nth-child(even) {
 
 tfoot td {
   font-weight: 600;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   background: #fbf9f3;
 }
 
@@ -188,27 +188,253 @@ select:focus {
   text-align: right;
 }
 
-/* Action / Delete button */
+/* Delete icon button */
 .action-cell {
   text-align: center;
 }
 
 .row-delete-btn {
   border: none;
-  background: #fee2e2;
+  background: transparent;
   color: #b91c1c;
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11px;
+  border-radius: 50%;
+  padding: 4px 6px;
+  font-size: 16px;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 .row-delete-btn:hover {
-  background: #fecaca;
+  background: #fee2e2;
 }
 
-/* Print styles – hide only .no-print elements */
+/* Toggle switches */
+.toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  margin-right: 16px;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  background-color: #d1d5db;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  top: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+  transition: transform 0.2s ease;
+}
+
+/* when checkbox is checked */
+.toggle-input:checked + .toggle-slider {
+  background-color: var(--primary);
+}
+
+.toggle-input:checked + .toggle-slider::before {
+  transform: translateX(18px);
+}
+
+/* Summary container with GST + transport */
+.summary-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.summary-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.summary-right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 10px;
+}
+
+/* GST / transport cards */
+.gst-card,
+.transport-card {
+  min-width: 260px;
+  max-width: 320px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.gst-card-header {
+  padding: 6px 10px;
+  background: #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.gst-card-body {
+  padding: 8px 10px 6px 10px;
+}
+
+/* three-column header and lines */
+.gst-header-row,
+.gst-line {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr 1fr;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.gst-col-type {
+  text-align: left;
+}
+
+.gst-col-rate {
+  text-align: center;
+}
+
+.gst-col-amt {
+  text-align: right;
+}
+
+.gst-header-row {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.gst-line .strong {
+  font-weight: 600;
+}
+
+.gst-divider {
+  border-top: 1px dashed var(--border);
+  margin: 4px 0 6px 0;
+}
+
+.gst-card-footer {
+  border-top: 1px solid var(--border);
+  padding: 6px 10px 8px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.gst-card-footer label {
+  font-weight: 500;
+}
+
+.gst-card-footer select,
+.gst-card-footer input {
+  width: 70px;
+  font-size: 12px;
+}
+
+/* Transport card */
+.transport-card .gst-card-body input {
+  width: 100%;
+  text-align: right;
+}
+
+/* hide helper */
+.hidden {
+  display: none !important;
+}
+
+/* Final invoice row */
+.final-row {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+
+.final-label {
+  font-weight: 600;
+}
+
+.final-value {
+  text-align: right;
+  font-weight: 600;
+}
+
+/* Invoice in words row */
+.words-row {
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 6px 4px;
+  font-size: 12px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items:center;
+}
+
+.words-label {
+  font-weight: 600;
+}
+
+.words-value {
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Visiting card section */
+.card-section {
+  margin-top: 24px;
+  border-top: 2px solid var(--border);
+  padding-top: 16px;
+}
+
+.card-title {
+  font-size: 15px;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+
+/* two cards side by side */
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card-image {
+  width: 260px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+}
+
+/* Print styles */
 @media print {
   body {
     background: #fff;
@@ -221,6 +447,10 @@ select:focus {
   .no-print {
     display: none !important;
   }
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
 }
 
 /* Small screens */
@@ -232,12 +462,13 @@ select:focus {
   .bill-meta {
     text-align: left;
   }
-}
-
-/* Suggest landscape orientation for printing */
-@media print {
-  @page {
-    size: A4 landscape;   /* or just: size: landscape; */
-    margin: 10mm;
+  .summary-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .summary-right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }

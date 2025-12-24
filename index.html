@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Plywood Billing - Garima Enterprises</title>
+
+  <!-- Favicon in /assets -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favi.png" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -10,7 +14,6 @@
   <div class="page">
     <header>
       <div>
-        <!-- Fixed shop name -->
         <div class="shop-name">Garima Enterprises</div>
         <div class="shop-subtitle">
           Plywood &amp; Hardware Billing
@@ -22,7 +25,7 @@
       </div>
     </header>
 
-    <!-- Customer details (will also print) -->
+    <!-- Customer details -->
     <section class="customer-row">
       <div class="customer-field">
         Customer:
@@ -38,7 +41,7 @@
       </div>
     </section>
 
-    <!-- Only this controls bar is hidden during print -->
+    <!-- Buttons (hidden on print) -->
     <section class="controls no-print">
       <div class="controls-right">
         <button class="btn btn-outline" type="button" onclick="addRow()">+ Add Row</button>
@@ -46,6 +49,7 @@
       </div>
     </section>
 
+    <!-- Billing table -->
     <div class="table-wrapper">
       <table id="billTable">
         <thead>
@@ -65,17 +69,128 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="6" class="text-right">Total</td>
-            <td class="text-right"><span id="grandTotal">0</span></td>
+            <td colspan="6" class="text-right">Subtotal</td>
+            <td class="text-right">
+              <span id="grandTotal">0.00</span>
+              <span id="baseTotal" style="display:none;">0.00</span>
+            </td>
             <td></td>
           </tr>
         </tfoot>
       </table>
     </div>
 
+    <!-- Toggles + GST / Transport summary -->
+    <div class="summary-container">
+      <div class="summary-left">
+        <label class="toggle-wrapper">
+          <span>Include GST</span>
+          <input type="checkbox" id="includeGst" class="toggle-input" />
+          <span class="toggle-slider"></span>
+        </label>
+
+        <label class="toggle-wrapper">
+          <span>Include Transport</span>
+          <input type="checkbox" id="includeTransport" class="toggle-input" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="summary-right">
+        <!-- GST card -->
+        <div id="gstCard" class="gst-card hidden">
+          <div class="gst-card-header">Taxes</div>
+          <div class="gst-card-body">
+            <div class="gst-header-row">
+              <span class="gst-col gst-col-type">Tax</span>
+              <span class="gst-col gst-col-rate">Rate %</span>
+              <span class="gst-col gst-col-amt text-right">Amount</span>
+            </div>
+
+            <div class="gst-line">
+              <span class="gst-col gst-col-type">IGST</span>
+              <span class="gst-col gst-col-rate" id="igstRateLabel">0%</span>
+              <span class="gst-col gst-col-amt text-right" id="igstAmount">0.00</span>
+            </div>
+
+            <div class="gst-line">
+              <span class="gst-col gst-col-type">CGST</span>
+              <span class="gst-col gst-col-rate" id="cgstRateLabel">0%</span>
+              <span class="gst-col gst-col-amt text-right" id="cgstAmount">0.00</span>
+            </div>
+
+            <div class="gst-line">
+              <span class="gst-col gst-col-type">SGST</span>
+              <span class="gst-col gst-col-rate" id="sgstRateLabel">0%</span>
+              <span class="gst-col gst-col-amt text-right" id="sgstAmount">0.00</span>
+            </div>
+
+            <div class="gst-divider"></div>
+
+            <div class="gst-line">
+              <span class="gst-col gst-col-type strong">Total taxes</span>
+              <span class="gst-col gst-col-rate"></span>
+              <span class="gst-col gst-col-amt text-right strong" id="totalTax">0.00</span>
+            </div>
+          </div>
+
+          <div class="gst-card-footer">
+            <label>GST Type</label>
+            <select id="gstType">
+              <option value="">Select</option>
+              <option value="IGST">IGST</option>
+              <option value="CGST_SGST">CGST + SGST</option>
+            </select>
+
+            <label>GST %</label>
+            <input id="gstRate" type="number" min="0" step="0.1" placeholder="18" />
+          </div>
+        </div>
+
+        <!-- Transport card -->
+        <div id="transportCard" class="transport-card hidden">
+          <div class="gst-card-header">Transport</div>
+          <div class="gst-card-body">
+            <div class="gst-line">
+              <span class="gst-col gst-col-type">Transport charges</span>
+              <span class="gst-col gst-col-rate"></span>
+              <span class="gst-col gst-col-amt text-right">
+                <input id="transportAmount" type="number" min="0" step="0.01" placeholder="0.00" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final invoice row -->
+    <div class="final-row">
+      <div class="final-label">Final invoice total</div>
+      <div class="final-value" id="finalTotal">0.00</div>
+    </div>
+
+    <!-- Invoice total in words full width -->
+    <div class="words-row">
+      <div class="words-label">Invoice total in words</div>
+      <div class="words-value" id="invoiceInWords">Zero rupees only</div>
+    </div>
+
     <div class="footer-note">
       Amount = (Size length × Size width × Qty × Rate). All values in feet and INR.
     </div>
+
+    <!-- Visiting / business card section -->
+    <section class="card-section">
+      <h2 class="card-title">Contact &amp; Business Details</h2>
+      <div class="card-wrapper">
+        <img src="assets/vc1.png"
+             alt="Garima Enterprises visiting card front"
+             class="card-image" />
+        <img src="assets/vc2.png"
+             alt="Garima Enterprises visiting card back"
+             class="card-image" />
+      </div>
+    </section>
   </div>
 
   <script src="app.js"></script>
